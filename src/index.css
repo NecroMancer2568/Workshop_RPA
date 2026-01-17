@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900;
+    @apply text-white;
+    @apply overflow-x-hidden;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600;
+    @apply bg-clip-text text-transparent;
+  }
+  
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-lg border border-white/20;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600;
+    @apply rounded-full font-semibold text-white;
+    @apply transform transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50;
+    @apply active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 bg-white/10 backdrop-blur-lg;
+    @apply border border-white/30 rounded-full font-semibold text-white;
+    @apply transform transition-all duration-300;
+    @apply hover:bg-white/20 hover:scale-105;
+    @apply active:scale-95;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:  linear-gradient(180deg, #764ba2 0%, #667eea 100%);
+}
+/* Hide Spline watermark/logo */
+spline-viewer::part(logo) {
+  display: none !important;
+}
+
+spline-viewer .spline-watermark,
+spline-viewer [class*="logo"],
+spline-viewer [class*="watermark"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
