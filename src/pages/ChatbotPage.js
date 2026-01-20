@@ -35,9 +35,12 @@ const ChatbotPage = () => {
 
     try {
       console.log('Sending message to backend:', userMessage);
-      console.log('Request URL: http://localhost:5001/chat');
-      
-      const response = await fetch('http://localhost:5001/chat', {
+      const API = process.env.REACT_APP_API_URL;
+
+      console.log('Request URL:', `${API}/chat`);
+
+      const response = await fetch(`${API}/chat`, {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,10 +87,10 @@ const ChatbotPage = () => {
         message: error.message,
         stack: error.stack,
       });
-      
+
       setTimeout(() => {
         let errorMessage = 'Sorry, something went wrong. Please try again.';
-        
+
         // Provide more specific error messages
         if (error.message) {
           errorMessage = error.message;
@@ -96,7 +99,7 @@ const ChatbotPage = () => {
         } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
           errorMessage = 'Network error: Cannot connect to the server. Make sure the Flask backend is running on http://localhost:5001';
         }
-        
+
         setMessages((prev) => [
           ...prev,
           { role: 'bot', content: errorMessage },
@@ -132,7 +135,7 @@ const ChatbotPage = () => {
             <div className="flex items-center space-x-4">
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale:  0.9 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={() => navigate('/')}
                 className="w-10 h-10 bg-white/10 backdrop-blur-lg rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
               >
@@ -170,23 +173,21 @@ const ChatbotPage = () => {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                animate={{ opacity:  1, y: 0, scale: 1 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.3 }}
-                className={`flex items-start space-x-3 ${
-                  message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
-                }`}
+                className={`flex items-start space-x-3 ${message.role === 'user' ? 'flex-row-reverse space-x-reverse' : ''
+                  }`}
               >
                 {/* Avatar */}
                 <motion.div
                   initial={{ scale: 0 }}
-                  animate={{ scale:  1 }}
+                  animate={{ scale: 1 }}
                   transition={{ delay: 0.1 }}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    message.role === 'bot'
+                  className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${message.role === 'bot'
                       ? 'bg-gradient-to-br from-purple-500 to-pink-500'
                       : 'bg-gradient-to-br from-cyan-500 to-blue-500'
-                  }`}
+                    }`}
                 >
                   {message.role === 'bot' ? (
                     <Bot className="w-5 h-5 text-white" />
@@ -197,11 +198,10 @@ const ChatbotPage = () => {
 
                 {/* Message Content */}
                 <div
-                  className={`max-w-[70%] rounded-2xl p-4 ${
-                    message.role === 'bot'
+                  className={`max-w-[70%] rounded-2xl p-4 ${message.role === 'bot'
                       ? 'bg-white/10 backdrop-blur-lg border border-white/20 rounded-tl-none'
                       : 'bg-gradient-to-r from-purple-600 to-pink-600 rounded-tr-none'
-                  }`}
+                    }`}
                 >
                   <p className="text-white leading-relaxed whitespace-pre-wrap">
                     {message.content}
@@ -215,7 +215,7 @@ const ChatbotPage = () => {
           {isTyping && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity:  1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               className="flex items-start space-x-3"
             >
@@ -235,7 +235,7 @@ const ChatbotPage = () => {
                 />
                 <motion.div
                   animate={{ y: [0, -8, 0] }}
-                  transition={{ duration:  0.6, repeat: Infinity, delay: 0.4 }}
+                  transition={{ duration: 0.6, repeat: Infinity, delay: 0.4 }}
                   className="w-2 h-2 bg-purple-400 rounded-full"
                 />
               </div>
