@@ -4,10 +4,10 @@ import google.genai as genai
 import os
 from dotenv import load_dotenv
 import re
+load_dotenv()
 API_KEY=os.getenv("GOOGLE_API_KEY")
 client = genai.Client(api_key=API_KEY)
 # Load environment variables
-load_dotenv()
 
 app = Flask(__name__)
 conversation_history=[]
@@ -132,3 +132,4 @@ def chat():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+
