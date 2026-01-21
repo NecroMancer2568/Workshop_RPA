@@ -2,6 +2,6 @@ flask
 flask-cors
 google-genai
 python.loaddotenv
-npm install 
+//To run install this file type pip install -r requirements.txt in your commandline
 
 
