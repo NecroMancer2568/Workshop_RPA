@@ -1,4 +1,7 @@
-flask==3.0.0
-flask-cors==4.0.0
-google-genai>=0.2.0
+flask
+flask-cors
+google-genai
+python.loaddotenv
+npm install 
+
 
