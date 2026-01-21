@@ -1,5 +1,4 @@
 flask
 flask-cors
 google-genai
-python.loaddotenv
-// to install from this file run pip install -r requirements.txt in your commandline
+python-dotenv
